@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.trade.service.v1;
+
+option go_package = "lucy/api/trade/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.trade.service.v1";
+
+service Trade {
+	rpc CreateTrade (CreateTradeRequest) returns (CreateTradeReply);
+	rpc UpdateTrade (UpdateTradeRequest) returns (UpdateTradeReply);
+	rpc DeleteTrade (DeleteTradeRequest) returns (DeleteTradeReply);
+	rpc GetTrade (GetTradeRequest) returns (GetTradeReply);
+	rpc ListTrade (ListTradeRequest) returns (ListTradeReply);
+}
+
+message CreateTradeRequest {}
+message CreateTradeReply {}
+
+message UpdateTradeRequest {}
+message UpdateTradeReply {}
+
+message DeleteTradeRequest {}
+message DeleteTradeReply {}
+
+message GetTradeRequest {}
+message GetTradeReply {}
+
+message ListTradeRequest {}
+message ListTradeReply {}

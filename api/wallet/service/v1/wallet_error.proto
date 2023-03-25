@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.wallet.service.v1;
+
+option go_package = "lucy/api/wallet/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.wallet.service.v1";
+
+service WalletError {
+	rpc CreateWalletError (CreateWalletErrorRequest) returns (CreateWalletErrorReply);
+	rpc UpdateWalletError (UpdateWalletErrorRequest) returns (UpdateWalletErrorReply);
+	rpc DeleteWalletError (DeleteWalletErrorRequest) returns (DeleteWalletErrorReply);
+	rpc GetWalletError (GetWalletErrorRequest) returns (GetWalletErrorReply);
+	rpc ListWalletError (ListWalletErrorRequest) returns (ListWalletErrorReply);
+}
+
+message CreateWalletErrorRequest {}
+message CreateWalletErrorReply {}
+
+message UpdateWalletErrorRequest {}
+message UpdateWalletErrorReply {}
+
+message DeleteWalletErrorRequest {}
+message DeleteWalletErrorReply {}
+
+message GetWalletErrorRequest {}
+message GetWalletErrorReply {}
+
+message ListWalletErrorRequest {}
+message ListWalletErrorReply {}

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.engine.service.v1;
+
+option go_package = "lucy/api/engine/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.engine.service.v1";
+
+service EngineError {
+	rpc CreateEngineError (CreateEngineErrorRequest) returns (CreateEngineErrorReply);
+	rpc UpdateEngineError (UpdateEngineErrorRequest) returns (UpdateEngineErrorReply);
+	rpc DeleteEngineError (DeleteEngineErrorRequest) returns (DeleteEngineErrorReply);
+	rpc GetEngineError (GetEngineErrorRequest) returns (GetEngineErrorReply);
+	rpc ListEngineError (ListEngineErrorRequest) returns (ListEngineErrorReply);
+}
+
+message CreateEngineErrorRequest {}
+message CreateEngineErrorReply {}
+
+message UpdateEngineErrorRequest {}
+message UpdateEngineErrorReply {}
+
+message DeleteEngineErrorRequest {}
+message DeleteEngineErrorReply {}
+
+message GetEngineErrorRequest {}
+message GetEngineErrorReply {}
+
+message ListEngineErrorRequest {}
+message ListEngineErrorReply {}

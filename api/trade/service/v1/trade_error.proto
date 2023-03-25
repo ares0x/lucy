@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.trade.service.v1;
+
+option go_package = "lucy/api/trade/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.trade.service.v1";
+
+service TradeError {
+	rpc CreateTradeError (CreateTradeErrorRequest) returns (CreateTradeErrorReply);
+	rpc UpdateTradeError (UpdateTradeErrorRequest) returns (UpdateTradeErrorReply);
+	rpc DeleteTradeError (DeleteTradeErrorRequest) returns (DeleteTradeErrorReply);
+	rpc GetTradeError (GetTradeErrorRequest) returns (GetTradeErrorReply);
+	rpc ListTradeError (ListTradeErrorRequest) returns (ListTradeErrorReply);
+}
+
+message CreateTradeErrorRequest {}
+message CreateTradeErrorReply {}
+
+message UpdateTradeErrorRequest {}
+message UpdateTradeErrorReply {}
+
+message DeleteTradeErrorRequest {}
+message DeleteTradeErrorReply {}
+
+message GetTradeErrorRequest {}
+message GetTradeErrorReply {}
+
+message ListTradeErrorRequest {}
+message ListTradeErrorReply {}

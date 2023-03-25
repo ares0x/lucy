@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.market.service.v1;
+
+option go_package = "lucy/api/market/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.market.service.v1";
+
+service Market {
+	rpc CreateMarket (CreateMarketRequest) returns (CreateMarketReply);
+	rpc UpdateMarket (UpdateMarketRequest) returns (UpdateMarketReply);
+	rpc DeleteMarket (DeleteMarketRequest) returns (DeleteMarketReply);
+	rpc GetMarket (GetMarketRequest) returns (GetMarketReply);
+	rpc ListMarket (ListMarketRequest) returns (ListMarketReply);
+}
+
+message CreateMarketRequest {}
+message CreateMarketReply {}
+
+message UpdateMarketRequest {}
+message UpdateMarketReply {}
+
+message DeleteMarketRequest {}
+message DeleteMarketReply {}
+
+message GetMarketRequest {}
+message GetMarketReply {}
+
+message ListMarketRequest {}
+message ListMarketReply {}

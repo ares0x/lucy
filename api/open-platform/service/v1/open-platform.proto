@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.open-platform.service.v1;
+
+option go_package = "lucy/api/open-platform/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.open-platform.service.v1";
+
+service Open-Platform {
+	rpc CreateOpen-Platform (CreateOpen-PlatformRequest) returns (CreateOpen-PlatformReply);
+	rpc UpdateOpen-Platform (UpdateOpen-PlatformRequest) returns (UpdateOpen-PlatformReply);
+	rpc DeleteOpen-Platform (DeleteOpen-PlatformRequest) returns (DeleteOpen-PlatformReply);
+	rpc GetOpen-Platform (GetOpen-PlatformRequest) returns (GetOpen-PlatformReply);
+	rpc ListOpen-Platform (ListOpen-PlatformRequest) returns (ListOpen-PlatformReply);
+}
+
+message CreateOpen-PlatformRequest {}
+message CreateOpen-PlatformReply {}
+
+message UpdateOpen-PlatformRequest {}
+message UpdateOpen-PlatformReply {}
+
+message DeleteOpen-PlatformRequest {}
+message DeleteOpen-PlatformReply {}
+
+message GetOpen-PlatformRequest {}
+message GetOpen-PlatformReply {}
+
+message ListOpen-PlatformRequest {}
+message ListOpen-PlatformReply {}
