@@ -3,37 +3,155 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: Engine API
     version: 0.0.1
 paths:
-    /helloworld/{name}:
-        get:
+    /order/v1/add:
+        post:
             tags:
-                - Greeter
-                - subgroup
-            description: Sends a greeting
-            operationId: Greeter_SayHello
-            parameters:
-                - name: name
-                  in: path
-                  required: true
-                  schema:
-                    type: string
+                - Engine
+            operationId: Engine_CreateOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.engine.service.v1.AddOrderReq'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/api.engine.service.v1.AddOrderReply'
+    /order/v1/cancel:
+        post:
+            tags:
+                - Engine
+            operationId: Engine_CancelOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.engine.service.v1.CancelOrderReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.engine.service.v1.CancelOrderReply'
+    /symbol/v1/close:
+        post:
+            tags:
+                - Engine
+            operationId: Engine_GetEngine
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.engine.service.v1.CloseSymbolReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.engine.service.v1.CloseSymbolReply'
+    /symbol/v1/open:
+        post:
+            tags:
+                - Engine
+            operationId: Engine_AddSymbol
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.engine.service.v1.AddSymbolReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.engine.service.v1.AddSymbolReply'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        api.engine.service.v1.AddOrderReply:
             type: object
             properties:
+                reply:
+                    $ref: '#/components/schemas/api.engine.service.v1.BasicReply'
+        api.engine.service.v1.AddOrderReq:
+            type: object
+            properties:
+                order:
+                    $ref: '#/components/schemas/api.engine.service.v1.Order'
+            description: 下单
+        api.engine.service.v1.AddSymbolReply:
+            type: object
+            properties:
+                reply:
+                    $ref: '#/components/schemas/api.engine.service.v1.BasicReply'
+        api.engine.service.v1.AddSymbolReq:
+            type: object
+            properties:
+                symbol:
+                    type: string
+                price:
+                    type: string
+            description: 新增交易对
+        api.engine.service.v1.BasicReply:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int32
                 message:
                     type: string
-            description: The response message containing the greetings
+        api.engine.service.v1.CancelOrderReply:
+            type: object
+            properties:
+                reply:
+                    $ref: '#/components/schemas/api.engine.service.v1.BasicReply'
+        api.engine.service.v1.CancelOrderReq:
+            type: object
+            properties:
+                symbol:
+                    type: string
+                orderId:
+                    type: string
+            description: 撤单
+        api.engine.service.v1.CloseSymbolReply:
+            type: object
+            properties:
+                reply:
+                    $ref: '#/components/schemas/api.engine.service.v1.BasicReply'
+        api.engine.service.v1.CloseSymbolReq:
+            type: object
+            properties:
+                symbol:
+                    type: string
+            description: 关闭交易对
+        api.engine.service.v1.Order:
+            type: object
+            properties:
+                orderId:
+                    type: string
+                userId:
+                    type: string
+                symbol:
+                    type: string
+                price:
+                    type: string
+                quantity:
+                    type: string
+                side:
+                    type: string
+                type:
+                    type: string
 tags:
-    - name: Greeter
+    - name: Engine

@@ -14,17 +14,41 @@ service User {
 	rpc ListUser (ListUserRequest) returns (ListUserReply);
 }
 
-message CreateUserRequest {}
-message CreateUserReply {}
+// 注册
+message Register {
+	string email = 1;
+	string password = 2;
+}
 
-message UpdateUserRequest {}
-message UpdateUserReply {}
+message RegisterReply {
+	int64 id = 1;
+}
+// 登陆
+message Login {
+	string email = 1;
+	string password = 2;
+}
 
-message DeleteUserRequest {}
-message DeleteUserReply {}
+message LoginReply {
+	bool ok = 1;
+	int64 id = 2;
+}
 
-message GetUserRequest {}
-message GetUserReply {}
+// 注销
+message DeleteUser {
+	string em
+}
 
-message ListUserRequest {}
-message ListUserReply {}
+message DeleteUserReply {
+
+} 
+// 获取用户信息
+message GetUser{}
+
+message GetUserReply{}
+
+// 获取用户列表
+
+message ListUser {}
+
+message ListUserReply{}
