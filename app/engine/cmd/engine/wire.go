@@ -8,7 +8,6 @@ package main
 import (
 	"lucy/app/engine/internal/biz"
 	"lucy/app/engine/internal/conf"
-	"lucy/app/engine/internal/data"
 	"lucy/app/engine/internal/server"
 	"lucy/app/engine/internal/service"
 
@@ -19,5 +18,5 @@ import (
 
 // wireApp init kratos application.
 func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
-	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
+	panic(wire.Build(server.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }
