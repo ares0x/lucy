@@ -1,6 +1,7 @@
 package biz
 
 import (
+	"context"
 	errors2 "errors"
 	"fmt"
 	"sync"
@@ -15,9 +16,13 @@ func NewEngine(symbols []string) (*Engine, error) {
 	e := &Engine{
 		orderBooks: make(map[string]*OrderBook),
 	}
+	// TODO 完善 graceful shutdown
+	ctx, cancel := context.WithCancel(context.TODO())
+	defer cancel()
 	for _, symbol := range symbols {
 		orderBook := NewOrderBook(symbol)
 		go orderBook.Match()
+		orderBook.ctx = ctx
 		e.orderBooks[symbol] = orderBook
 	}
 	return e, nil

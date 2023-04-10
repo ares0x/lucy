@@ -103,10 +103,12 @@ func TestOrder_AddWithDiffPrice(t *testing.T) {
 		Quantity:  decimal.NewFromInt(10),
 	}
 	ok := &OrderKey{
+		OrderId:   ob.OrderId,
 		Price:     ob.Price,
 		TimeStamp: ob.TimeStamp,
 	}
 	ok2 := &OrderKey{
+		OrderId:   ob2.OrderId,
 		Price:     ob2.Price,
 		TimeStamp: ob2.TimeStamp,
 	}
@@ -122,4 +124,7 @@ func TestOrder_AddWithDiffPrice(t *testing.T) {
 		t.Log(k)
 		t.Log(od)
 	}
+	t.Logf("before ob:%+v", orderbook.bids) // 移除
+	orderbook.bids.Remove(ok)
+	t.Logf("after ob:%+v", orderbook.bids) // 移除
 }
