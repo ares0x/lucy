@@ -9,6 +9,7 @@ package main
 import (
 	"lucy/app/engine/internal/biz"
 	"lucy/app/engine/internal/conf"
+	"lucy/app/engine/internal/data"
 	"lucy/app/engine/internal/server"
 	"lucy/app/engine/internal/service"
 
@@ -20,18 +21,25 @@ import (
 
 // wireApp init kratos application.
 func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	//dataData, cleanup, err := data.NewData(confData, logger)
-	//if err != nil {
-	//	return nil, nil, err
-	//}
+	redisCli := data.NewRedis(confData,logger)
+	dataData, cleanup, err := data.NewData(confData,redisCli, logger)
+	if err != nil {
+		return nil, nil, err
+	}
 	symbols := []string{"BTC_USDT", "ETH_USDT", "OP_USDT"}
 	engine, err := biz.NewEngine(symbols)
 	if err != nil {
 		return nil, nil, err
 	}
-	grpcServer := server.NewGRPCServer(confServer, service.NewEngineService(engine), logger)
-	httpServer := server.NewHTTPServer(confServer, service.NewEngineService(engine), logger)
+	symbolRepo := data.NewSymbolRepo(dataData,logger)
+	priceRepo := data.NewPriceRepo(dataData,logger)
+	symbolCase := biz.NewSymbolUseCase(symbolRepo)
+	priceCase := biz.NewPriceUseCase(priceRepo)
+	engineService := service.NewEngineService(engine,priceCase, symbolCase)
+	grpcServer := server.NewGRPCServer(confServer, engineService, logger)
+	httpServer := server.NewHTTPServer(confServer, engineService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
+		cleanup()
 	}, nil
 }
