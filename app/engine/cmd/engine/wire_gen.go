@@ -21,15 +21,23 @@ import (
 
 // wireApp init kratos application.
 func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	dataData, cleanup, err := data.NewData(confData, logger)
+	redisCli := data.NewRedis(confData,logger)
+	dataData, cleanup, err := data.NewData(confData,redisCli, logger)
 	if err != nil {
 		return nil, nil, err
 	}
-	greeterRepo := data.NewGreeterRepo(dataData, logger)
-	greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
-	greeterService := service.NewGreeterService(greeterUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	symbols := []string{"BTC_USDT", "ETH_USDT", "OP_USDT"}
+	engine, err := biz.NewEngine(symbols)
+	if err != nil {
+		return nil, nil, err
+	}
+	symbolRepo := data.NewSymbolRepo(dataData,logger)
+	priceRepo := data.NewPriceRepo(dataData,logger)
+	symbolCase := biz.NewSymbolUseCase(symbolRepo)
+	priceCase := biz.NewPriceUseCase(priceRepo)
+	engineService := service.NewEngineService(engine,priceCase, symbolCase)
+	grpcServer := server.NewGRPCServer(confServer, engineService, logger)
+	httpServer := server.NewHTTPServer(confServer, engineService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

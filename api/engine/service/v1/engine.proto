@@ -2,29 +2,87 @@ syntax = "proto3";
 
 package api.engine.service.v1;
 
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
 option go_package = "lucy/api/engine/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.engine.service.v1";
 
 service Engine {
-	rpc CreateEngine (CreateEngineRequest) returns (CreateEngineReply);
-	rpc UpdateEngine (UpdateEngineRequest) returns (UpdateEngineReply);
-	rpc DeleteEngine (DeleteEngineRequest) returns (DeleteEngineReply);
-	rpc GetEngine (GetEngineRequest) returns (GetEngineReply);
-	rpc ListEngine (ListEngineRequest) returns (ListEngineReply);
+	rpc CreateOrder (AddOrderReq) returns (AddOrderReply) {
+		option (google.api.http) = {
+			post: "/order/v1/add",
+			body:"*"
+		};
+	};
+	rpc CancelOrder (CancelOrderReq) returns (CancelOrderReply) {
+		option (google.api.http) = {
+			post: "/order/v1/cancel",
+			body:"*"
+		};
+	};
+	rpc AddSymbol (AddSymbolReq) returns (AddSymbolReply) {
+		option (google.api.http) = {
+			post: "/symbol/v1/open",
+			body:"*"
+		};
+	};
+	rpc CloseSymbol (CloseSymbolReq) returns (CloseSymbolReply) {
+		option (google.api.http) = {
+			post: "/symbol/v1/close",
+			body:"*"
+		};
+	};
 }
 
-message CreateEngineRequest {}
-message CreateEngineReply {}
+message Order{
+	string orderId = 1 [(validate.rules).string = {min_bytes: 1}]; // 委托单id
+	string userId = 2 [(validate.rules).string = {min_bytes: 1}]; // 用户id
+	string symbol = 3 [(validate.rules).string = {min_bytes: 1}]; // 交易对名称，eg：BTC_USDT
+	string price = 4; // 价格：当该笔交易为市价交易时，不需要传价格
+	string quantity = 5 [(validate.rules).string = {min_bytes: 1}]; // 委托单数量
+	string side = 6 [(validate.rules).string = {min_bytes: 1}]; // 委托单类型:1.买（buy）;2.卖（sell）
+	string type = 7 [(validate.rules).string = {min_bytes: 1}]; // 委托单类型:1.限价（limit）;2.市价（market）
+}
 
-message UpdateEngineRequest {}
-message UpdateEngineReply {}
+message BasicReply{
+	int32 code = 1;
+	string message = 2;
+}
 
-message DeleteEngineRequest {}
-message DeleteEngineReply {}
+// 下单
+message AddOrderReq {
+	Order order = 1 [(validate.rules).message.required = true]; // 必填
+}
 
-message GetEngineRequest {}
-message GetEngineReply {}
+message AddOrderReply {
+		BasicReply reply = 1;
+}
 
-message ListEngineRequest {}
-message ListEngineReply {}
+// 撤单
+message CancelOrderReq {
+	string symbol = 1 [(validate.rules).string = {min_bytes: 1}];
+	string orderId = 2 [(validate.rules).string = {min_bytes: 1}];
+}
+
+message CancelOrderReply {
+	BasicReply reply = 1;
+}
+
+// 新增交易对
+message AddSymbolReq {
+	string symbol = 1 [(validate.rules).string = {min_bytes: 1}];// 币对名称,eg:BTC_USDT
+	string price = 2 [(validate.rules).string = {min_bytes: 1}];// 初始价格
+}
+message AddSymbolReply {
+	BasicReply reply = 1;
+}
+
+// 关闭交易对
+message CloseSymbolReq {
+	string symbol = 1 [(validate.rules).string = {min_bytes: 1}]; // 币对名称,eg:BTC_USDT
+}
+message CloseSymbolReply {
+	BasicReply reply = 1;
+}
