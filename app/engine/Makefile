@@ -29,7 +29,6 @@ init:
 # generate internal proto
 config:
 	protoc --proto_path=./internal \
-	       --proto_path=./third_party \
  	       --go_out=paths=source_relative:./internal \
 	       $(INTERNAL_PROTO_FILES)
 
@@ -62,6 +61,10 @@ all:
 	make api;
 	make config;
 	make generate;
+
+start:
+	pwd
+	go run cmd/engine/main.go cmd/engine/wire_gen.go
 
 # show help
 help:

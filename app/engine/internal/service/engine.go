@@ -11,11 +11,15 @@ import (
 type EngineService struct {
 	pb.UnimplementedEngineServer
 	engine *biz.Engine
+	pc     *biz.PriceUseCase
+	sc     *biz.SymbolUseCase
 }
 
-func NewEngineService(engine *biz.Engine) *EngineService {
+func NewEngineService(engine *biz.Engine, pc *biz.PriceUseCase, sc *biz.SymbolUseCase) *EngineService {
 	return &EngineService{
 		engine: engine,
+		pc:     pc,
+		sc:     sc,
 	}
 }
 
@@ -42,6 +46,7 @@ func (s *EngineService) CreateOrder(ctx context.Context, req *pb.AddOrderReq) (*
 	}
 	return &pb.AddOrderReply{}, nil
 }
+
 func (s *EngineService) CancelOrder(ctx context.Context, req *pb.CancelOrderReq) (*pb.CancelOrderReply, error) {
 	// 从订单簿中删除
 	if err := s.engine.Cancel(req.Symbol, req.OrderId); err != nil {
@@ -49,13 +54,23 @@ func (s *EngineService) CancelOrder(ctx context.Context, req *pb.CancelOrderReq)
 	}
 	return &pb.CancelOrderReply{}, nil
 }
+
 func (s *EngineService) AddSymbol(ctx context.Context, req *pb.AddSymbolReq) (*pb.AddSymbolReply, error) {
+	_, err := s.sc.SetSymbol(req.GetSymbol())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.engine.Open(req.Symbol); err != nil {
 		return nil, err
 	}
 	return &pb.AddSymbolReply{}, nil
 }
+
 func (s *EngineService) GetEngine(ctx context.Context, req *pb.CloseSymbolReq) (*pb.CloseSymbolReply, error) {
+	_, err := s.sc.DelSymbol(req.GetSymbol())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.engine.Close(req.Symbol); err != nil {
 		return nil, err
 	}

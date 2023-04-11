@@ -28,7 +28,7 @@ service Engine {
 			body:"*"
 		};
 	};
-	rpc GetEngine (CloseSymbolReq) returns (CloseSymbolReply) {
+	rpc CloseSymbol (CloseSymbolReq) returns (CloseSymbolReply) {
 		option (google.api.http) = {
 			post: "/symbol/v1/close",
 			body:"*"

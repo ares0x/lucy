@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/go-kratos/kratos/v2/middleware/logging"
 	v1 "lucy/api/engine/service/v1"
 	"lucy/app/engine/internal/conf"
 	"lucy/app/engine/internal/service"
@@ -15,6 +16,7 @@ func NewGRPCServer(c *conf.Server, engine *service.EngineService, logger log.Log
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
+			logging.Server(logger),
 		),
 	}
 	if c.Grpc.Network != "" {

@@ -21,11 +21,6 @@ type OrderRepo interface {
 }
 
 func (o *Order) Apply(log *raft.Log) interface{} {
-	//o := new(Order)
-	//if err := json.Unmarshal(log.Data, o); err != nil {
-	//	return nil
-	//}
-	//
 	return nil
 }
 
