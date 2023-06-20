@@ -1,18 +1,13 @@
 syntax = "proto3";
 package kratos.api;
 
-option go_package = "lucy/app/engine/internal/conf;conf";
+option go_package = "lucy/app/wallet-gateway-gateway/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
 message Bootstrap {
   Server server = 1;
   Data data = 2;
-  Trace trace = 3;
-}
-
-message Trace {
-  string endpoint = 1;
 }
 
 message Server {
@@ -43,14 +38,4 @@ message Data {
   }
   Database database = 1;
   Redis redis = 2;
-}
-
-message Raft{
-  message Cluster {
-
-  }
-  message Node {
-    string addr = 1;
-    string dir = 2;
-  }
 }

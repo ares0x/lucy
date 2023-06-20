@@ -1,6 +1,6 @@
 # lucy
 
-lucy 是一个基于 [kratos](https://github.com/go-kratos/kratos) 框架开发的中心化交易所，名字的灵感来源于斯嘉丽约翰逊主演的电影《超体》。
+lucy 是一个基于 [kratos](https://github.com/go-kratos/kratos) 框架开发的中心化交易所，名字的灵感来源于斯嘉丽约翰逊主演的电影《超体》(https://en.wikipedia.org/wiki/Lucy_(2014_film))。
 我会在该项目中展示一个中心化交易所的基本构成。
 
 ## 注意事项

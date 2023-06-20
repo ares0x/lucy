@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoLinterSettings">
+    <option name="enabledLinters">
+      <list>
+        <option value="decorder" />
+        <option value="exportloopref" />
+        <option value="funlen" />
+        <option value="noctx" />
+        <option value="gocognit" />
+        <option value="maintidx" />
+        <option value="nestif" />
+        <option value="grouper" />
+        <option value="exhaustive" />
+        <option value="bidichk" />
+        <option value="nilerr" />
+        <option value="revive" />
+        <option value="prealloc" />
+        <option value="staticcheck" />
+        <option value="errorlint" />
+        <option value="misspell" />
+        <option value="typecheck" />
+        <option value="gochecknoinits" />
+        <option value="nosprintfhostport" />
+        <option value="rowserrcheck" />
+        <option value="thelper" />
+        <option value="tparallel" />
+        <option value="asciicheck" />
+        <option value="nolintlint" />
+        <option value="gosec" />
+        <option value="gomodguard" />
+        <option value="godox" />
+        <option value="unconvert" />
+        <option value="unused" />
+        <option value="depguard" />
+        <option value="paralleltest" />
+        <option value="godot" />
+        <option value="goprintffuncname" />
+        <option value="gosimple" />
+        <option value="gocyclo" />
+        <option value="predeclared" />
+        <option value="importas" />
+        <option value="gofumpt" />
+        <option value="errchkjson" />
+        <option value="cyclop" />
+        <option value="goconst" />
+        <option value="errcheck" />
+        <option value="sqlclosecheck" />
+        <option value="dogsled" />
+        <option value="ineffassign" />
+        <option value="deadcode" />
+        <option value="unparam" />
+        <option value="goheader" />
+        <option value="structcheck" />
+        <option value="nakedret" />
+        <option value="promlinter" />
+        <option value="execinquery" />
+        <option value="nlreturn" />
+        <option value="durationcheck" />
+        <option value="dupl" />
+        <option value="govet" />
+        <option value="forbidigo" />
+        <option value="gomoddirectives" />
+        <option value="wastedassign" />
+        <option value="lll" />
+        <option value="makezero" />
+        <option value="bodyclose" />
+        <option value="varcheck" />
+        <option value="golint" />
+        <option value="gofmt" />
+        <option value="stylecheck" />
+        <option value="whitespace" />
+        <option value="ifshort" />
+        <option value="goimports" />
+      </list>
+    </option>
+    <option name="goLinterExe" value="$PROJECT_DIR$/../../bin/golangci-lint" />
+    <option name="linterSelected" value="true" />
+  </component>
+</project>

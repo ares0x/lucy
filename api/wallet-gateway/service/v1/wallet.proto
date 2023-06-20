@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package api.wallet.service.v1;
+
+option go_package = "lucy/api/wallet-gateway-gateway/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.wallet-gateway-gateway.service.v1";
+
+service Wallet {
+	rpc CreateWallet (CreateWalletRequest) returns (CreateWalletReply);
+	rpc UpdateWallet (UpdateWalletRequest) returns (UpdateWalletReply);
+	rpc DeleteWallet (DeleteWalletRequest) returns (DeleteWalletReply);
+	rpc GetWallet (GetWalletRequest) returns (GetWalletReply);
+	rpc ListWallet (ListWalletRequest) returns (ListWalletReply);
+}
+
+message BasicReply{
+	int32 code = 1;
+	string message = 2;
+}
+
+// GetAddr 获取地址
+message GetDepositAddressReq{
+	string userId = 1;
+	string coin = 2;
+	string network = 3;
+
+}
+
+message DepositAddressReply{
+	string address = 1;
+	string coin = 2;
+	string legacyAddress = 3;
+	string legacyTag =4;
+}
+
+message GetDepositAddressReply{
+		BasicReply reply = 1;
+		DepositAddressReply depositReply = 2;
+}
+
+
+message Withdraw{
+	string userId = 1;
+	string coin = 2;
+	string network = 3;
+
+}
+
+message CreateWalletRequest {}
+message CreateWalletReply {}
+
+message UpdateWalletRequest {}
+message UpdateWalletReply {}
+
+message DeleteWalletRequest {}
+message DeleteWalletReply {}
+
+message GetWalletRequest {}
+message GetWalletReply {}
+
+message ListWalletRequest {}
+message ListWalletReply {}

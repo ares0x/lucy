@@ -1,15 +1,16 @@
 //go:build wireinject
+// +build wireinject
 
 // The build tag makes sure the stub is not built in the final build.
 
 package main
 
 import (
-	"lucy/app/engine/internal/biz"
-	"lucy/app/engine/internal/conf"
-	"lucy/app/engine/internal/data"
-	"lucy/app/engine/internal/server"
-	"lucy/app/engine/internal/service"
+	"lucy/app/wallet-gateway/internal/biz"
+	"lucy/app/wallet-gateway/internal/conf"
+	"lucy/app/wallet-gateway/internal/data"
+	"lucy/app/wallet-gateway/internal/server"
+	"lucy/app/wallet-gateway/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

@@ -1,6 +1,9 @@
 package biz
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/shopspring/decimal"
+)
 
 type PriceRepo interface {
 	SetSymbolPrice(symbol string, price decimal.Decimal)
@@ -12,7 +15,7 @@ type PriceUseCase struct {
 	repo PriceRepo
 }
 
-func NewPriceUseCase(repo PriceRepo) *PriceUseCase {
+func NewPriceUseCase(repo PriceRepo, logger log.Logger) *PriceUseCase {
 	return &PriceUseCase{repo: repo}
 }
 
