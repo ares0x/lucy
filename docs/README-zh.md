@@ -31,7 +31,7 @@ lucy 是一个基于 [kratos](https://github.com/go-kratos/kratos) 框架开发�
 - 钱包服务 wallet
 - 订单服务 order
 - 活动服务 market
-- 交易服务 trade：管理委托和订单的逻辑，比如验证委托，冻结资产，创建订单
+- 交易服务 trade
 - 撮合服务 engine
 - 开放平台 open-platform
 

@@ -7,8 +7,8 @@ option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
-	rpc CreateUser (Register) returns (CreateUserReply);
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+	rpc Register (RegisterRequest) returns (RegisterReply);
+	rpc Login (LoginRequest) returns (LoginReply);
 	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
 	rpc GetUser (GetUserRequest) returns (GetUserReply);
 	rpc ListUser (ListUserRequest) returns (ListUserReply);
@@ -21,7 +21,7 @@ message BasicReply{
 
 
 // 注册
-message Register {
+message RegisterRequest {
 	string email = 1;
 	string password = 2;
 }
@@ -31,7 +31,7 @@ message RegisterReply {
 	BasicReply reply = 2;
 }
 // 登陆
-message Login {
+message LoginRequest {
 	string email = 1;
 	string password = 2;
 }
@@ -42,7 +42,7 @@ message LoginReply {
 }
 
 // 注销
-message DeleteUser {
+message DeleteUserRequest {
 
 }
 
@@ -50,7 +50,7 @@ message DeleteUserReply {
 	BasicReply reply = 1;
 } 
 // 获取用户信息
-message GetUser{
+message GetUserRequest {
 	string userId = 1;
 	string email = 2;
 }
@@ -59,6 +59,6 @@ message GetUserReply{
 }
 
 // 获取用户列表
-message ListUser {}
+message ListUserRequest {}
 
 message ListUserReply{}

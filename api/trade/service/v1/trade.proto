@@ -14,7 +14,17 @@ service Trade {
 	rpc ListTrade (ListTradeRequest) returns (ListTradeReply);
 }
 
-message CreateTradeRequest {}
+// cancel order type
+enum CancelType
+{
+	User = 0;
+	System = 1;
+}
+
+message CreateTradeRequest {
+	string base = 1;
+
+}
 message CreateTradeReply {}
 
 message UpdateTradeRequest {}

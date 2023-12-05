@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package api.walletbtc.service.v1;
+
+option go_package = "lucy/api/wallet-btc/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.wallet-btc.service.v1";
+
+service Walletbtc {
+	rpc GetAddress (GetAddressRequest) returns (GetAddressReply);
+	rpc Withdraw (WithdrawRequest) returns (WithdrawReply);
+}
+
+message GetAddressRequest {
+	string user_id = 1;
+}
+message GetAddressReply {
+	string address = 1;
+}
+
+message WithdrawRequest {
+	string user_id = 1;
+	string amount = 2;
+	string to_address = 3;
+}
+message WithdrawReply {}
